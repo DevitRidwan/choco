@@ -1,0 +1,6 @@
+{%block content%}
+<a href="{%url 'pengeluaran-tambah'%}">Pembelian</a>
+{%for keluar in pengeluaran%}
+	<li><a href="{%url 'pengeluaran-detail' keluar.kd_keluar%}">{{keluar.kd_keluar}}&nbsp&nbsp{{keluar.tanggal}}&nbsp&nbsp{{keluar.item}}</a></li>
+{%endfor%}
+{%endblock%}

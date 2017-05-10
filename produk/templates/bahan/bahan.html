@@ -1,0 +1,6 @@
+{%block content%}
+<a href="{%url 'bahan-tambah'%}">Tambah item</a>
+{%for bahan in bahan%}
+	<li><a href="{%url 'bahan-detail' bahan.kd_bahan%}">{{bahan.nama}}</a></li>
+{%endfor%}
+{%endblock%}

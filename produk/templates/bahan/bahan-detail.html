@@ -1,0 +1,8 @@
+<h1>{{bahan.nama}}</h1>
+{% for bahan in bahan.item.all%}
+<h1>{{bahan}}</h1>
+{%endfor%}
+<h1>{{bahan.harga}}</h1>
+<h1>{{bahan.stok}}</h1>
+<h1>{{bahan.jumlah}}</h1>
+<a href="{%url 'bahan-edit' bahan.kd_bahan%}">edit</a>

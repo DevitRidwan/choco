@@ -1,0 +1,6 @@
+{%block content%}
+<a href="{%url 'pemasukan-tambah'%}">Penjualan</a>
+{%for masuk in pemasukan%}
+	<li><a href="{%url 'pemasukan-detail' masuk.kd_masuk%}">{{masuk.kd_masuk}}&nbsp&nbsp{{masuk.tanggal}}&nbsp&nbsp{{masuk.item}}</a></li>
+{%endfor%}
+{%endblock%}
