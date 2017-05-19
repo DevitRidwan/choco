@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'choco',
     'inventory',
     'produk',
+    'profil',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,10 +58,11 @@ ROOT_URLCONF = 'choco.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates',(os.path.join(BASE_DIR, 'templates')),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'inventory.context_processor.all',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -121,41 +123,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
-LOGGING = {
-    'version':1,
-    'disable_exiting_longer':True,
-    'formatters':{
-        'verbose':{
-            'format':'%(levelname)s %(asctime)s %(modeuls)s %(process)d %(thread)d %(message)s'
-        },
-        'simple':{
-            'format':'%(levelname)s %(message)s'
-        },
-    },
-    'handlers':{
-        'file':{
-            'level':'DEBUG',
-            'class':'logging.FileHandler',
-            'filename':'choco.log',
-            'formatter':'verbose'
-        },
-        'db':{
-            'level':'ERROR',
-            'class': 'inventory.loggers.MyDbLogHandler',
-            'formatter':'verbose'
-        }
-    },
-    'loggers':{
-        'django.request':{
-            'handlers':['file'],
-            'level':'DEBUG',
-            'propagate':False,
-        },
-        'myapplog':{
-            'handlers':['db'],
-            'level':'DEBUG',
-            'propagate':False
-        }
-    }
-}
+LOGIN_REDIRECT_URL = '/'

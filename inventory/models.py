@@ -10,6 +10,7 @@ class Pemasukan(models.Model):
 	tanggal = models.DateField(default=date.today)
 	item = models.ForeignKey('produk.Item')
 	jumlah = models.IntegerField(default=1)
+	total_harga = models.IntegerField(default=0)
 
 	class Meta:
 		ordering = ['tanggal']
@@ -21,8 +22,12 @@ class Pengeluaran(models.Model):
 	kd_keluar = models.CharField(max_length=11, primary_key=True)
 	tanggal = models.DateField(default=date.today)
 	item = models.ForeignKey('produk.Bahan')
+	harga = models.IntegerField()
 	keterangan = models.CharField(max_length=75, blank=True, help_text="jika pembelian tidak ada di kolom bahan")
 	jumlah = models.IntegerField(default=1)
+
+	class Meta:
+		ordering = ['tanggal']
 
 	def __str__(self):
 		return str(self.tanggal)
@@ -34,8 +39,5 @@ class Rekap(models.Model):
 	pengeluaran = models.ForeignKey(Pengeluaran)
 	tot_keluar = models.DecimalField(max_digits=9, decimal_places=2, help_text='Total Pengeluaran')
 
-#Coba logging
-class SystemLog(models.Model):
-	level = models.CharField(max_length=200)
-	message = models.TextField()
-	timestamp = models.DateField('timestamp', null=True, blank=True)
+class ModalAwal(models.Model):
+	modal = models.IntegerField()

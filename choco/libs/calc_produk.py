@@ -20,6 +20,8 @@ def update_stok(status, sub_status, transaksi, jumlah):
 	if status == "in":
 		item = Item.objects.get(pk=transaksi.item_id)
 		filter_bahan = Formula.objects.filter(item__pk=item.pk)
+		transaksi.total_harga = jumlah * item.harga
+		transaksi.save()
 		for bahan in filter_bahan:
 			if sub_status == "tambah":
 				bahan.stok = bahan.stok - (jumlah * bahan.jumlah)
@@ -31,9 +33,9 @@ def update_stok(status, sub_status, transaksi, jumlah):
 	if status == "out":
 		bahan = Formula.objects.get(pk=transaksi.item_id)
 		if sub_status == "tambah":
-			bahan.stok = bahan.stok + jumlah
+			bahan.stok = bahan.stok + (jumlah * bahan.netto)
 		elif sub_status == "edit":
-			bahan.stok = (bahan.stok - transaksi.jumlah) + jumlah
+			bahan.stok = (bahan.stok - (transaksi.jumlah * bahan.netto)) + (jumlah * bahan.netto)
 		else:
-			bahan.stok = bahan.stok - transaksi.jumlah
+			bahan.stok = bahan.stok - (transaksi.jumlah * bahan.netto)
 		bahan.save()

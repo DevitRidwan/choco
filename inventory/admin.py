@@ -3,3 +3,4 @@ from . import models
 # Register your models here.
 admin.site.register(models.Pemasukan)
 admin.site.register(models.Pengeluaran)
+admin.site.register(models.ModalAwal)

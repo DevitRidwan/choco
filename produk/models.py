@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 class Bahan(models.Model):
 	kd_bahan = models.CharField(max_length=11, primary_key=True)
 	nama = models.CharField(max_length=25)
+	netto = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True, help_text='dalam gram')
 	item = models.ManyToManyField('Item')
 	stok = models.IntegerField(default=0)
 
@@ -16,7 +17,7 @@ class Bahan(models.Model):
 		return self.nama
 
 class Formula(Bahan):
-	jumlah = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True, help_text='dalam gram')
+	jumlah = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True, help_text='jumlah pemakaian dalam gram')
 	
 	def get_items(self):
 		return "\n".join([p.item for p in self.item.all()])

@@ -1,9 +1,8 @@
 from .models import Pemasukan, Pengeluaran, Rekap
 from produk.models import Item, Formula
 from django import forms
-from django.forms import ModelForm
 
-class PemasukanForm(ModelForm):
+class PemasukanForm(forms.ModelForm):
 	if Pemasukan.objects.count()<=0:
 		kd_masuk = forms.CharField(max_length=11, initial='10000000000')
 	else:
@@ -15,7 +14,7 @@ class PemasukanForm(ModelForm):
 		#widgets = {'kd_masuk': forms.HiddenInput()}
 		fields = '__all__'
 
-class PengeluaranForm(ModelForm):
+class PengeluaranForm(forms.ModelForm):
 	class Meta:
 		model = Pengeluaran
 		fields = '__all__'

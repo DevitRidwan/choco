@@ -1,0 +1,11 @@
+{% block content %}
+{% for tahun, total in all_tahun.items %}
+		<p>Total Transaksi tahun {{tahun}}</p>
+		<p>Total Pemasukan: {{total.0}}</p>
+		<p>Total Pengeluaran: {{total.1}}</p>
+	{% endfor %}
+<p>Pendapatan Bersih:{{bencos}}</p>
+{% for item, estimate in view  %}
+	<p>{{item.nama}}&nbsp(Estimasi Stok: {{estimate}})</p>
+{% endfor %}
+{% endblock %}

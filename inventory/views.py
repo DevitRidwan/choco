@@ -15,6 +15,7 @@ def Overview(request):
 	view_pengeluaran = InventoryView.pengeluaran
 	tanggal_masuk = view_pemasukan.filter(tanggal__month=timezone.now().month)
 	tanggal_keluar = view_pengeluaran.filter(tanggal__month=timezone.now().month)
+	return render(request, 'inventory.html')
 
 def PemasukanView(request):
 	pemasukan = Pemasukan.objects.order_by('tanggal')
@@ -30,8 +31,8 @@ def PemasukanEdit(request, pk):
 	form = PemasukanForm(request.POST or None, instance=pemasukan)
 	if form.is_valid():
 		jumlah = form.cleaned_data['jumlah']
-		calc_produk.update_stok("in","edit",cache,jumlah)
 		form.save()
+		calc_produk.update_stok("in","edit",cache,jumlah)
 		return redirect(reverse('pemasukan-detail', args=(pemasukan.pk,)))
 	extra_context = {
 		'form':form,
@@ -91,7 +92,7 @@ def PengeluaranTambah(request):
 		jumlah = form.cleaned_data['jumlah']
 		form.save()
 		pengeluaran = Pengeluaran.objects.get(pk=keluar)
-		calc_produk.update_stok("out","tambah",pengeluaran,jumlah)
+		calc_produk.update_stok("out","tambah",pengeluaran,jumlah,harga)
 		return redirect(PengeluaranView)
 	return render(request, 'pengeluaran/pengeluaran-tambah.html', {'form':form})
 

@@ -3,10 +3,6 @@ from .models import Item, Formula
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.urls import reverse
-import sys
-sys.path.append("choco/libs")
-from calc_produk import view_stok
-
 """data item"""
 
 class ItemForm(ModelForm):
@@ -16,8 +12,7 @@ class ItemForm(ModelForm):
 
 def ItemView(request):
 	items = Item.objects.order_by('nama')
-	view = zip(items, view_stok(items))
-	return render(request, 'item/item.html', {'items':items, 'view':view})
+	return render(request, 'item/item.html', {'items':items})
 
 def ItemDetail(request, pk):
 	item = get_object_or_404(Item, pk=pk)
