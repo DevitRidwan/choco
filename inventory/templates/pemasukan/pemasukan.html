@@ -1,6 +1,27 @@
+{% extends "layout_inventory.html" %}
 {%block content%}
-<a href="{%url 'pemasukan-tambah'%}">Penjualan</a>
+<a href="{%url 'pemasukan-tambah'%}" class="btn btn-outline-primary">Penjualan</a>
+<br><br>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Kode Penjualan</th>
+			<th>Tanggal</th>
+			<th>Item</th>
+			<th>Keterangan</th>
+			<th></th>
+		</tr>
+	</thead>
 {%for masuk in pemasukan%}
-	<li><a href="{%url 'pemasukan-detail' masuk.kd_masuk%}">{{masuk.kd_masuk}}&nbsp&nbsp{{masuk.tanggal}}&nbsp&nbsp{{masuk.item}}</a></li>
+	<tbody>
+		<tr>
+			<td>{{masuk.kd_masuk}}</td>
+			<td>{{masuk.tanggal}}</td>
+			<td>{{masuk.item}}</td>
+			<td>{{masuk.keterangan}}</td>
+			<td><a href="{%url 'pemasukan-edit' masuk.kd_masuk%}" class="btn btn-outline-primary">Edit</a></td>
+		</tr>
+	</tbody>
 {%endfor%}
+</table>
 {%endblock%}

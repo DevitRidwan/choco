@@ -1,0 +1,27 @@
+{% extends "layout_profile.html" %}
+{%block content%}
+<a href="{%url 'profile-tambah'%}" class="btn btn-outline-primary">Tambah Pegawai</a>
+	<br><br>
+	<div class="col-md-10">
+	<table class="table">
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>Nama</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	{% for profile in profiles %}
+	<tbody>
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{profile.nama}}</td>
+			<td><a href="{% url 'profile-detail' profile.pk %}" class="btn btn-outline-primary">View</a></td>
+			<td><a href="{% url 'useradd' profile.pk %}" class="btn btn-outline-primary">Add User</a></td>
+		</tr>
+	</tbody>
+	{% endfor %}
+	</table>
+	</div>
+{%endblock%}

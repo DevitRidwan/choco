@@ -26,7 +26,7 @@ def update_stok(status, sub_status, transaksi, jumlah):
 			if sub_status == "tambah":
 				bahan.stok = bahan.stok - (jumlah * bahan.jumlah)
 			elif sub_status == "edit":
-				bahan.stok = (bahan.stok + (transaksi.jumlah * bahan.jumlah)) - (bahan.stok - (jumlah * bahan.jumlah))	
+				bahan.stok = bahan.stok + (transaksi.jumlah * bahan.jumlah)-(jumlah * bahan.jumlah)
 			elif sub_status == "delete":
 				bahan.stok = bahan.stok + (transaksi.jumlah * bahan.jumlah)
 			bahan.save()

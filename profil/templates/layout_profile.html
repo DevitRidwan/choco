@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block nav-layout %}
+	<li class="nav-item">
+		<a href="{% url 'inventory' %}" class="{% if request.resolver_match.url_name == "profiles" %}active{% endif %} nav-link"></i>Inventory</a>
+	</li>
+	<li class="nav-item">
+		<a href="{% url 'pemasukan' %}" class="{% if request.resolver_match.url_name == "pemasukan" %}active{% endif %} nav-link"></i>Penjualan</a>
+	</li>
+	<li class="nav-item">
+		<a href="{% url 'pengeluaran' %}" class="{% if request.resolver_match.url_name == "pengaluaran" %}active{% endif %} nav-link"></i>Pembelian</a>
+	</li>
+{% endblock %}

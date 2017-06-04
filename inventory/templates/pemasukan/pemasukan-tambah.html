@@ -1,11 +1,23 @@
-{% if messages %}
-<ul>
-	{% for message in messages %}
-	   <li>{{ message }}</li>
-	{% endfor %}
-</ul>
-{% endif %}
-<form action="" method="post">{%csrf_token%}
-	{{form.as_p}}
-	<input type="submit" name="Save">
-</form>
+{% extends "layout_inventory.html" %}
+{% block content %}
+	<form action="" method="post">{%csrf_token%}
+		<table class="table">
+			{% for row in form %}	
+				<tr>
+					<td>{{row.label}}</td>
+					<td>{{row}}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<tr>
+			<td>
+			<div class="row">
+				<div class="col-md-1  offset-md-5">
+          		<input type="submit" class="btn btn-outline-primary" name="Save" value="Save">
+    			</div>
+    			<a href="{%url 'pemasukan' %}" class="btn btn-outline-primary">Batal</a></p>
+    		</div>
+			</td>
+		</tr>
+	</form>
+{% endblock %}

@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.css" type="text/css"> </head>
+
+<body>
+  <div class="mx-3 py-5">
+    <div class="container">
+      <div class="row col-md-11  offset-md-1">
+        <div class="col-md-6">
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a href="{% url 'inventory' %}" class="{% if request.resolver_match.url_name == "inventory" %}active{% endif %} nav-link">Home</a></li>
+            <li class="nav-item">
+              <a href="{% url 'profiles' %}" class="{% if request.resolver_match.url_name == "profiles" %}active{% endif %} nav-link" >Profile</a>
+            </li>
+            <div class="btn-group">
+              <button class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> Dropdown </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'produk' %}">Produk</a>
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'bahan' %}">Bahan</a>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="col-md-1 offset-md-5">
+          <a href="{% url 'logout' %}" class="btn btn-outline-primary">Button</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="nav nav-pills flex-column"> {% block nav-layout %} {% endblock %} </ul>
+      </div>
+      <div class="col-md-10 "> {% block content %} {% endblock %} </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.min.js"></script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-	url(r'^$', views.Overview, name='inventory'),
+	url(r'^$', views.Overview, name="inventory"),
 	#url pemasukan
 	url(r'^/pemasukan/$', views.PemasukanView, name='pemasukan'),
 	url(r'^/pemasukan/(?P<pk>[0-9]+)$', views.PemasukanDetail, name='pemasukan-detail'),

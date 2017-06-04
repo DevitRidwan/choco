@@ -1,45 +1,48 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.models import Group
 from .models import Pemasukan, Pengeluaran, Rekap
-from produk.models import Item, Formula
 from django.urls import reverse
 from django.utils import timezone
 from .inventory_detail import InventoryView
 from .forms import PemasukanForm, PengeluaranForm
+from profil.decorators import group_required
 from copy import deepcopy
 import sys
 sys.path.append("choco/libs")
 import calc_produk
 
+@group_required(('Dev-It', 'Is-User'))
 def Overview(request):
-	view_pemasukan = InventoryView.pemasukan
-	view_pengeluaran = InventoryView.pengeluaran
-	tanggal_masuk = view_pemasukan.filter(tanggal__month=timezone.now().month)
-	tanggal_keluar = view_pengeluaran.filter(tanggal__month=timezone.now().month)
 	return render(request, 'inventory.html')
 
+@group_required(('Dev-It', 'Is-User'))
 def PemasukanView(request):
 	pemasukan = Pemasukan.objects.order_by('tanggal')
 	return render(request, 'pemasukan/pemasukan.html', {'pemasukan':pemasukan})
 
+@group_required(('Dev-It', 'Is-User'))
 def PemasukanDetail(request, pk):
 	pemasukan = get_object_or_404(Pemasukan, pk=pk)
 	return render(request, 'pemasukan/pemasukan-detail.html', {'pemasukan':pemasukan})
 
+@group_required(('Dev-It', 'Is-User'))
 def PemasukanEdit(request, pk):
 	pemasukan = get_object_or_404(Pemasukan, pk=pk)
 	cache = deepcopy(pemasukan)
 	form = PemasukanForm(request.POST or None, instance=pemasukan)
 	if form.is_valid():
 		jumlah = form.cleaned_data['jumlah']
-		form.save()
 		calc_produk.update_stok("in","edit",cache,jumlah)
-		return redirect(reverse('pemasukan-detail', args=(pemasukan.pk,)))
+		form.save()
+		return redirect(PemasukanView)
 	extra_context = {
 		'form':form,
 		'pemasukan':pemasukan
 	}
 	return render(request, 'pemasukan/pemasukan-edit.html', extra_context)
 
+@group_required(('Dev-It', 'Is-User'))
 def PemasukanTambah(request):
 	form = PemasukanForm(request.POST or None)
 	if form.is_valid():
@@ -53,6 +56,7 @@ def PemasukanTambah(request):
 			return redirect(PemasukanView)
 	return render(request, 'pemasukan/pemasukan-tambah.html', {'form':form})
 
+@group_required(('Dev-It', 'Is-User'))
 def PemasukanDelete(request, pk):
 	pemasukan = get_object_or_404(Pemasukan, pk=pk)
 	if request.method=='POST':
@@ -62,14 +66,17 @@ def PemasukanDelete(request, pk):
 		return redirect(PemasukanView)
 	return render(request, 'pemasukan/pemasukan-delete.html', {'object':pemasukan})
 
+@group_required(('Dev-It', 'Is-User'))
 def PengeluaranView(request):
 	pengeluaran = Pengeluaran.objects.order_by('tanggal')
 	return render(request, 'pengeluaran/pengeluaran.html', {'pengeluaran':pengeluaran})
 
+@group_required(('Dev-It', 'Is-User'))
 def PengeluaranDetail(request, pk):
 	pengeluaran = get_object_or_404(Pengeluaran, pk=pk)
 	return render(request, 'pengeluaran/pengeluaran-detail.html', {'pengeluaran':pengeluaran})
 
+@group_required(('Dev-It', 'Is-User'))
 def PengeluaranEdit(request, pk):
 	pengeluaran = Pengeluaran.objects.get(pk=pk)
 	cache = deepcopy(pengeluaran)
@@ -85,6 +92,7 @@ def PengeluaranEdit(request, pk):
 	}
 	return render(request, 'pengeluaran/pengeluaran-edit.html', extra_context)
 
+@group_required(('Dev-It', 'Is-User'))
 def PengeluaranTambah(request):
 	form = PengeluaranForm(request.POST or None)
 	if form.is_valid():
@@ -96,6 +104,7 @@ def PengeluaranTambah(request):
 		return redirect(PengeluaranView)
 	return render(request, 'pengeluaran/pengeluaran-tambah.html', {'form':form})
 
+@group_required(('Dev-It', 'Is-User'))
 def PengeluaranDelete(request, pk):
 	pengeluaran = get_object_or_404(Pengeluaran, pk=pk)
 	if request.method=='POST':

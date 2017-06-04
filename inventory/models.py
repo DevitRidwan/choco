@@ -10,12 +10,13 @@ class Pemasukan(models.Model):
 	tanggal = models.DateField(default=date.today)
 	item = models.ForeignKey('produk.Item')
 	jumlah = models.IntegerField(default=1)
+	keterangan = models.CharField(max_length=50)
 	total_harga = models.IntegerField(default=0)
 
 	class Meta:
 		ordering = ['tanggal']
 
-	def __str__(self):
+	def __unicode__(self):
 		return str(self.tanggal)
 
 class Pengeluaran(models.Model):
@@ -29,7 +30,7 @@ class Pengeluaran(models.Model):
 	class Meta:
 		ordering = ['tanggal']
 
-	def __str__(self):
+	def __unicode__(self):
 		return str(self.tanggal)
 
 class Rekap(models.Model):

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Profile: {{profile.nama}}</h1>
+	{{profile.photo}}
+<tr>
+	<td>
+		Nama
+		<td>: &nbsp&nbsp&nbsp&nbsp&nbsp{{profile.nama}}</td>
+	</td>
+</tr>
+<tr>
+	<td>
+		Status
+		<td>: &nbsp&nbsp&nbsp&nbsp&nbsp{{profile.get_status_display}}</td>
+	</td>
+</tr>
+<tr>
+	<td>
+		Alamat
+		<td>: &nbsp&nbsp&nbsp&nbsp&nbsp{{profile.alamat}}</td>
+	</td>
+</tr>
+<tr>
+	<td>
+		Tanggal Lahir
+		<td>: &nbsp&nbsp&nbsp&nbsp&nbsp{{profile.tgl_lahir}}</td>
+	</td>
+</tr>
+{% endblock %}
+<a href="{%url 'profile-edit' profile.pk%}">Edit</a>

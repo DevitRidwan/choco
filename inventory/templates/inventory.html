@@ -1,11 +1,88 @@
+{% extends "layout_item.html" %}
 {% block content %}
-{% for tahun, total in all_tahun.items %}
-		<p>Total Transaksi tahun {{tahun}}</p>
-		<p>Total Pemasukan: {{total.0}}</p>
-		<p>Total Pengeluaran: {{total.1}}</p>
-	{% endfor %}
-<p>Pendapatan Bersih:{{bencos}}</p>
-{% for item, estimate in view  %}
-	<p>{{item.nama}}&nbsp(Estimasi Stok: {{estimate}})</p>
-{% endfor %}
+<div class="col-md-4">
+	<div class="card">
+		<table class="table">
+		<center><h3>Estimasi Stok</h3></center>
+		<thead>
+				<tr>
+					<th>Nama Item</th>
+					<th><center>Total Stok</center></th>
+				</tr>
+			</thead>
+		{% for item, estimate in view  %}
+			<tbody>
+			<tr>
+				<td>{{item.nama}}</td>
+				<td><center>{{estimate}}</center></td>
+			</tr>
+			</tbody>
+		{% endfor %}
+		</table>
+	</div>
+</div>
+<br><br>
+ <div class="py-5">
+    <div class="container">
+      <div class="row">
+	<div class="col-md-5">
+		<div class="card">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Tahun</th>
+						<th>Pemasukan</th>
+						<th>Pengeluaran</th>
+						<th>Pendapatan</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for total in inven_all %}
+					<tr>
+						<td>{{total.0}}</td>
+						<td>{{total.1}}</td>
+						<td>{{total.2}}</td>
+						<td>{{total.3}}</td>
+					</tr>
+				{% endfor %}
+					<tr>
+						<td colspan="2"><strong>TOTAL</strong></td>
+						<td></td>
+						<td>{{total_thn}}</td>
+					</tr>
+				</tbody>
+		</table>
+	</div>
+</div>
+<br>
+	<div class="col-md-5">
+		<div class="card">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Bulan</th>
+						<th>Pemasukan</th>
+						<th>Pengeluaran</th>
+						<th>Pendapatan</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for total in inven_bulan %}
+					<tr>
+						<td>{{total.0}}</td>
+						<td>{{total.1}}</td>
+						<td>{{total.2}}</td>
+						<td>{{total.3}}</td>
+					</tr>
+				{% endfor %}
+					<tr>
+						<td colspan="2"><strong>TOTAL</strong></td>
+						<td></td>
+						<td>{{total_bln}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 {% endblock %}

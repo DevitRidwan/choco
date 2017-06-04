@@ -1,6 +1,0 @@
-{%block content%}
-<a href="{%url 'item-tambah'%}">Tambah item</a>
-{%for item, estimate in view%}
-	<li><a href="{%url 'item-detail' item.kd_item%}">{{item.nama}}</a><p>(Estimasi Stok: {{estimate}})</p></li>
-{%endfor%}
-{%endblock%}

@@ -13,6 +13,9 @@ class Bahan(models.Model):
 	item = models.ManyToManyField('Item')
 	stok = models.IntegerField(default=0)
 
+	class Meta:
+		ordering = ['nama']
+
 	def __str__(self):
 		return self.nama
 
@@ -26,8 +29,11 @@ class Item(models.Model):
 	#image = 
 	kd_item = models.CharField(max_length=11, primary_key=True)
 	nama = models.CharField(max_length=25)
-	harga = models.DecimalField(max_digits=9, decimal_places=2)
+	harga = models.IntegerField()
 	stok = models.IntegerField(default=0)
+
+	class Meta:
+		ordering = ['nama']
 
 	def __str__(self):
 		return self.nama

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{%block content%}
+<a href="{%url 'produk-tambah'%}" class="btn btn-outline-primary">Tambah Produk</a>
+	<br><br>
+	<div class="col-md-10">
+	<table class="table">
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>Kd Produk</th>
+			<th>Nama</th>
+			<th>Stok Estimate</th>
+		</tr>
+	</thead>
+	{% for item, estimate in view %}
+	<tbody>
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td><a href="{% url 'produk-detail' item.pk %}">{{item.kd_item}}</a></td>
+			<td>{{item.nama}}</td>
+			<td>{{estimate}}</td>
+		</tr>
+	</tbody>
+	{% endfor %}
+	</table>
+	</div>
+{%endblock%}

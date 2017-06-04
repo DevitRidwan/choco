@@ -1,6 +1,27 @@
+{% extends "base.html" %}
 {%block content%}
-<a href="{%url 'bahan-tambah'%}">Tambah item</a>
-{%for bahan in bahan%}
-	<li><a href="{%url 'bahan-detail' bahan.kd_bahan%}">{{bahan.nama}}</a></li>
-{%endfor%}
+<a href="{%url 'bahan-tambah'%}" class="btn btn-outline-primary">Tambah Bahan</a>
+	<br><br>
+	<div class="col-md-10">
+	<table class="table">
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>Kd Bahan</th>
+			<th>Nama</th>
+			<th>Stok</th>
+		</tr>
+	</thead>
+	{% for bahan in bahan %}
+	<tbody>
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td><a href="{% url 'bahan-detail' bahan.pk %}">{{bahan.kd_bahan}}</a></td>
+			<td>{{bahan.nama}}</td>
+			<td>{{bahan.stok}}</td>
+		</tr>
+	</tbody>
+	{% endfor %}
+	</table>
+	</div>
 {%endblock%}
